@@ -1,20 +1,28 @@
 {
-  "name": "react-state_box",
+  "name": "react-basics_hello-world-article",
   "version": "0.0.0-unreleased",
-  "description": "React State: Box",
+  "description": "React Basics: Hello World Article Challenge",
   "main": "src/index.js",
   "dependencies": {
+    "@apollo/client": "^3.9.6",
+    "@apollo/server": "^4.10.1",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.15.12",
+    "graphql": "^16.8.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-scripts": "5.0.1"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "7.21.11",
     "@babel/runtime": "7.22.11",
-    "eslint-plugin-react-hooks": "4.6.0",
-    "@babel/plugin-proposal-private-property-in-object": "7.21.11"
+    "eslint-plugin-react-hooks": "4.6.0"
   },
   "scripts": {
-    "start": "react-scripts start"
+    "dev": "react-scripts start",
+  "start": "concurrently \"npm run dev\" \"npm run server\" ",
+    "server": "node server.js"
   },
   "nf": {
     "template": "react-minimal"
@@ -30,5 +38,7 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "type": "module"
 }
+
