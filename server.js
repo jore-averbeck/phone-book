@@ -10,7 +10,18 @@ const resolvers = {
     },
     phoneNumber(_, args) {
       return phoneNumbers.find((phoneNumber) => phoneNumber.id === args.id);
-    }
+    },
+    searchContacts: (_, { search }) => {
+      if (!search) {
+        return phoneNumbers;
+      }
+      
+      const filteredContacts = phoneNumbers.filter((phoneNumber) =>
+        phoneNumber.name.toLowerCase().includes(search.toLowerCase()) ||
+        phoneNumber.phone.includes(search)
+      );
+      return filteredContacts;
+    },
   }
 };
 

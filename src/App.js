@@ -1,34 +1,58 @@
-import React from "react";
+import React, { useState } from "react";
 import "./styles.css";
-import { useQuery, gql } from "@apollo/client"
-import { Typography, Container} from "@mui/material";
+import { useQuery, gql } from "@apollo/client";
+import { Typography, Container, Input } from "@mui/material";
 
-const getAllNumbers = gql`
+const GET_PHONE_NUMBERS = gql`
   query GetPhoneNumbers {
     phoneNumbers {
-      id,
-      name,
+      id
+      name
       phone
     }
   }
 `;
 
+const SEARCH_CONTACTS = gql`
+  query SearchContacts($search: String!) {
+    searchContacts(filter: {
+      OR: [
+        { name_contains: $search },
+        { phone_contains: $search }
+      ]
+    }) {
+      id
+      name
+      phone
+    }
+  }
+`;
 
 export default function App() {
-  const { loading, error, data } = useQuery(getAllNumbers);
+  const [searchTerm, setSearchTerm] = useState('');
   
-  
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error</p>;
-  if(!data) return <p>No data found</p>
+  const { loading, error, data } = useQuery(searchTerm ? SEARCH_CONTACTS : GET_PHONE_NUMBERS, {
+    variables: { search: searchTerm }
+  });
 
+  function handleChange(event) {
+    setSearchTerm(event.target.value);
+  }
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  const phoneList = data ? (data.searchContacts ? data.searchContacts : data.phoneNumbers) : [];
 
   return (
     <Container>
       <Typography variant="h1" color="primary" align="center">Phone Book</Typography>
-      {data.phoneNumbers.map(phone => (
-        <Typography key={phone.id}>{phone.name} - {phone.phone}</Typography>
-      ))}
+      <Input onChange={handleChange} value={searchTerm} placeholder="Search"/>
+      {phoneList.length > 0 ? (
+        phoneList.map(phone => (
+          <Typography key={phone.id}>{phone.name} - {phone.phone}</Typography>
+        ))
+      ) : <Typography>No phone numbers found</Typography>}
     </Container>
   );
 }
