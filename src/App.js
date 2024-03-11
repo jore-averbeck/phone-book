@@ -34,6 +34,9 @@ export default function App() {
     setSearchTerm(event.target.value);
   }
 
+  function handleReset() {
+    setSearchTerm('');
+  }
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
@@ -43,7 +46,7 @@ export default function App() {
   return (
     <Container>
       <Typography variant="h1" color="primary" align="center">Phone Book</Typography>
-         <SearchInput handleChange={handleChange} searchTerm={searchTerm} phoneList={phoneList}/>
+         <SearchInput handleChange={handleChange} searchTerm={searchTerm} phoneList={phoneList} onReset={handleReset}/>
     </Container>
   );
 }
