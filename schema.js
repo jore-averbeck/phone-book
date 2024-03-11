@@ -7,6 +7,6 @@ type PhoneNumber {
 type Query {
     phoneNumbers:[PhoneNumber]
     phoneNumber(id:ID!):PhoneNumber
-    searchContacts(name:String!):[PhoneNumber]
+    searchContacts(search:String!):[PhoneNumber]
 }
 `

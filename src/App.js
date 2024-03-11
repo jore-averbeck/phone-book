@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import "./styles.css";
+import React, { useState, useEffect } from "react";
 import { useQuery, gql } from "@apollo/client";
 import { Typography, Container, Input } from "@mui/material";
+import SearchInput from "./components/SearchInput.js";
 
 const GET_PHONE_NUMBERS = gql`
   query GetPhoneNumbers {
@@ -15,12 +15,7 @@ const GET_PHONE_NUMBERS = gql`
 
 const SEARCH_CONTACTS = gql`
   query SearchContacts($search: String!) {
-    searchContacts(filter: {
-      OR: [
-        { name_contains: $search },
-        { phone_contains: $search }
-      ]
-    }) {
+    searchContacts(search: $search) {
       id
       name
       phone
@@ -39,6 +34,7 @@ export default function App() {
     setSearchTerm(event.target.value);
   }
 
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
@@ -47,12 +43,8 @@ export default function App() {
   return (
     <Container>
       <Typography variant="h1" color="primary" align="center">Phone Book</Typography>
-      <Input onChange={handleChange} value={searchTerm} placeholder="Search"/>
-      {phoneList.length > 0 ? (
-        phoneList.map(phone => (
-          <Typography key={phone.id}>{phone.name} - {phone.phone}</Typography>
-        ))
-      ) : <Typography>No phone numbers found</Typography>}
+         <SearchInput handleChange={handleChange} searchTerm={searchTerm} phoneList={phoneList}/>
     </Container>
   );
 }
+
