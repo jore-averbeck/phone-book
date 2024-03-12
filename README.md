@@ -1,6 +1,6 @@
 # Phone Book with React and GraphQL
 
-
+Please note that you can not only search the phone list by name, but also by number
 
 ### Scripts
 

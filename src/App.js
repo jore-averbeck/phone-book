@@ -51,7 +51,7 @@ export default function App() {
 
   return (
     <Container>
-      <Typography variant="h2" component="h1" color="primary" align="center" gutterBottom >Phone Book</Typography>
+      <Typography variant="h2" component="h1" color="primary" align="center" gutterBottom >Phone book</Typography>
       <SearchInput handleChange={handleChange} searchTerm={searchTerm} phoneList={phoneList} onReset={handleReset}/>
     </Container>
   );
