@@ -1,7 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client'
+import ReactDOM from 'react-dom';
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { ApolloProvider } from '@apollo/client';
+import  {createTheme, ThemeProvider}  from "@mui/material";
+
 import App from './App.js';
 
 const client = new ApolloClient({
@@ -9,9 +11,22 @@ const client = new ApolloClient({
   cache: new InMemoryCache()
 });
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#211e78',
+    },
+    secondary: {
+      main: '#cc7a16',
+    },
+  },
+});
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <ApolloProvider client={client}>
-    <App />
-  </ApolloProvider>
+  <ThemeProvider theme={theme}>
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
+  </ThemeProvider>
 );

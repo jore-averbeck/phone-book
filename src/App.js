@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import { useQuery, gql } from "@apollo/client";
-import { Typography, Container, Input } from "@mui/material";
+import { Typography, Container} from "@mui/material";
+
 import SearchInput from "./components/SearchInput.js";
 
 const GET_PHONE_NUMBERS = gql`
@@ -22,6 +23,8 @@ const SEARCH_CONTACTS = gql`
     }
   }
 `;
+
+
 
 export default function App() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -45,7 +48,7 @@ export default function App() {
 
   return (
     <Container>
-      <Typography variant="h1" color="primary" align="center">Phone Book</Typography>
+      <Typography variant="h2" component="h1" color="primary" align="center" gutterBottom>Phone Book</Typography>
          <SearchInput handleChange={handleChange} searchTerm={searchTerm} phoneList={phoneList} onReset={handleReset}/>
     </Container>
   );
