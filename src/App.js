@@ -2,6 +2,8 @@ import React, { useState} from "react";
 import { useQuery, gql } from "@apollo/client";
 import { Typography, Container} from "@mui/material";
 
+
+
 import SearchInput from "./components/SearchInput.js";
 
 const GET_PHONE_NUMBERS = gql`
@@ -23,6 +25,7 @@ const SEARCH_CONTACTS = gql`
     }
   }
 `;
+
 
 
 
@@ -48,8 +51,8 @@ export default function App() {
 
   return (
     <Container>
-      <Typography variant="h2" component="h1" color="primary" align="center" gutterBottom>Phone Book</Typography>
-         <SearchInput handleChange={handleChange} searchTerm={searchTerm} phoneList={phoneList} onReset={handleReset}/>
+      <Typography variant="h2" component="h1" color="primary" align="center" gutterBottom >Phone Book</Typography>
+      <SearchInput handleChange={handleChange} searchTerm={searchTerm} phoneList={phoneList} onReset={handleReset}/>
     </Container>
   );
 }
